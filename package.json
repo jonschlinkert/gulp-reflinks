@@ -1,6 +1,6 @@
 {
   "name": "gulp-reflinks",
-  "description": "Gulp plugin that lints a markdown string to find missing reflinks.",
+  "description": "Gulp plugin for `reflinks`. Lints a markdown string to find missing reflinks for npm package names, resolves the homepage or repository url from npm, and appends a valid reflink to the document.",
   "version": "0.1.0",
   "homepage": "https://github.com/jonschlinkert/gulp-reflinks",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
@@ -19,22 +19,42 @@
   "scripts": {
     "test": "mocha"
   },
-  "dependencies": {},
+  "dependencies": {
+    "debug": "^2.2.0",
+    "reflinks": "^0.2.6",
+    "through2": "^2.0.1"
+  },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
     "gulp-format-md": "^0.1.9",
-    "mocha": "^2.4.5"
+    "gulp-istanbul": "^0.10.4",
+    "gulp-mocha": "^2.2.0",
+    "mocha": "^2.4.5",
+    "vinyl-fs": "^2.4.3"
   },
   "keywords": [],
   "verb": {
+    "toc": false,
     "layout": "default",
+    "tasks": [
+      "readme"
+    ],
     "plugins": [
       "gulp-format-md"
     ],
     "related": {
-      "list": []
+      "list": [
+        "reflinks",
+        "helper-reflinks"
+      ]
     },
     "reflinks": [
-      "verb"
-    ]
+      "verb",
+      "gulp"
+    ],
+    "lint": {
+      "reflinks": true
+    }
   }
 }

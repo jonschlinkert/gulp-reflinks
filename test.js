@@ -3,26 +3,102 @@
 require('mocha');
 var assert = require('assert');
 var reflinks = require('./');
+var vfs = require('vinyl-fs');
 
 describe('gulp-reflinks', function() {
   it('should export a function', function() {
     assert.equal(typeof reflinks, 'function');
   });
 
-  it('should export an object', function() {
-    assert(reflinks);
-    assert.equal(typeof reflinks, 'object');
+  it('should lint reflinks', function(cb) {
+    var files = [];
+    vfs.src('fixtures/missing.md')
+      .pipe(reflinks())
+      .on('data', function(file) {
+        files.push(file);
+      })
+      .on('end', function() {
+        assert.equal(files[0].contents.toString(), '[gulp][]\n\n[gulp]: http://gulpjs.com');
+        cb();
+      });
   });
 
-  it('should throw an error when invalid args are passed', function(cb) {
-    try {
-      reflinks();
-      cb(new Error('expected an error'));
-    } catch (err) {
-      assert(err);
-      assert.equal(err.message, 'expected first argument to be a string');
-      assert.equal(err.message, 'expected callback to be a function');
-      cb();
-    }
+  it('should not add reflinks that already exist', function(cb) {
+    var files = [];
+    vfs.src('fixtures/no-dupes.md')
+      .pipe(reflinks())
+      .on('data', function(file) {
+        files.push(file);
+      })
+      .on('end', function() {
+        assert.equal(files[0].contents.toString(), '[gulp][]\n\n[gulp]: http://gulpjs.com');
+        cb();
+      });
+  });
+
+  it('should lint compact reflinks', function(cb) {
+    var files = [];
+    vfs.src('fixtures/missing-compact.md')
+      .pipe(reflinks())
+      .on('data', function(file) {
+        files.push(file);
+      })
+      .on('end', function() {
+        assert.equal(files[0].contents.toString(), '[gulp]\n\n[gulp]: http://gulpjs.com');
+        cb();
+      });
+  });
+
+  it('should detect multiple missing reflinks', function(cb) {
+    var files = [];
+    vfs.src('fixtures/multiple.md')
+      .pipe(reflinks())
+      .on('data', function(file) {
+        files.push(file);
+      })
+      .on('end', function() {
+        assert.equal(files[0].contents.toString(), '[assemble][]\n[generate][]\n[verb][]\n\n[assemble]: https://github.com/assemble/assemble\n[generate]: https://github.com/generate/generate\n[verb]: https://github.com/verbose/verb');
+        cb();
+      });
+  });
+
+  it('should ignore reflinks in backticks', function(cb) {
+    var files = [];
+    vfs.src('fixtures/code.md')
+      .pipe(reflinks())
+      .on('data', function(file) {
+        files.push(file);
+      })
+      .on('end', function() {
+        assert(!/https/.test(files[0].contents.toString()));
+        cb();
+      });
+  });
+
+  it('should set reflinks on `file._reflinks`', function(cb) {
+    var files = [];
+    vfs.src('fixtures/missing-compact.md')
+      .pipe(reflinks())
+      .on('data', function(file) {
+        files.push(file);
+      })
+      .on('end', function() {
+        assert.deepEqual(files[0]._reflinks, ['gulp']);
+        assert.equal(files[0].contents.toString(), '[gulp]\n\n[gulp]: http://gulpjs.com');
+        cb();
+      });
+  });
+
+  it('should set multiple reflinks on `file._reflinks`', function(cb) {
+    var files = [];
+    vfs.src('fixtures/multiple.md')
+      .pipe(reflinks())
+      .on('data', function(file) {
+        files.push(file);
+      })
+      .on('end', function() {
+        assert.deepEqual(files[0]._reflinks, ['assemble', 'generate', 'verb']);
+        cb();
+      });
   });
 });
