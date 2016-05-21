@@ -22,19 +22,15 @@
   "dependencies": {},
   "devDependencies": {
     "gulp-format-md": "*",
-    "mocha": "^2.4.5"
+    "mocha": "*"
   },
   "keywords": [],
   "verb": {
     "layout": "default",
-    "plugins": [
-      "gulp-format-md"
-    ],
+    "plugins": ["gulp-format-md"],
     "related": {
       "list": []
     },
-    "reflinks": [
-      "verb"
-    ]
+    "reflinks": ["verb"]
   }
 }
