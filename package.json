@@ -1,0 +1,40 @@
+{
+  "name": "gulp-reflinks",
+  "description": "Gulp plugin that lints a markdown string to find missing reflinks.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/gulp-reflinks",
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "repository": "jonschlinkert/gulp-reflinks",
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/gulp-reflinks/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp-format-md": "*",
+    "mocha": "^2.4.5"
+  },
+  "keywords": [],
+  "verb": {
+    "layout": "default",
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "related": {
+      "list": []
+    },
+    "reflinks": [
+      "verb"
+    ]
+  }
+}
