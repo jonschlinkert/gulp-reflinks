@@ -34,7 +34,7 @@ module.exports = function(options) {
       matches.forEach(function(match) {
         var idx = match.indexOf(']');
         var name = match.slice(1, idx).trim().toLowerCase();
-        if (arr.indexOf(name) === -1) {
+        if (name && arr.indexOf(name) === -1) {
           arr.push(name);
           count++;
         }
