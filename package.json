@@ -10,7 +10,9 @@
   },
   "license": "MIT",
   "files": [
-    "index.js"
+    "index.js",
+    "LICENSE",
+    "README.md"
   ],
   "main": "index.js",
   "engines": {
@@ -33,7 +35,12 @@
     "mocha": "^2.4.5",
     "vinyl-fs": "^2.4.3"
   },
-  "keywords": [],
+  "keywords": [
+    "gulp",
+    "gulpplugin",
+    "plugin",
+    "reflinks"
+  ],
   "verb": {
     "toc": false,
     "layout": "default",
@@ -45,8 +52,8 @@
     ],
     "related": {
       "list": [
-        "reflinks",
-        "helper-reflinks"
+        "helper-reflinks",
+        "reflinks"
       ]
     },
     "reflinks": [
