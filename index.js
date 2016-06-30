@@ -10,10 +10,9 @@ var through = require('through2');
  */
 
 module.exports = function(options) {
-  debug('initializing from <%s>', module.parent.id);
   options = options || [];
 
-  var regex = /((?!`)\[[^\]]+\]\[\](?!`)|(?!`)\[[^\]]+\](?= |$))/g;
+  var regex = /((?!`)\[[^\W\]]+\]\[\](?!`)|(?!`)\[[^\W\]]+\](?= |$))/g;
   var count = 0;
   var arr = [];
 
@@ -27,6 +26,7 @@ module.exports = function(options) {
       return;
     }
 
+    debug('matching reflinks in <%s>', file.path);
     var str = file.contents.toString();
     var matches = str.match(regex);
 
@@ -44,17 +44,20 @@ module.exports = function(options) {
     debug('found %s missing reflink(s): %j', arr.length, arr);
 
     if (count === 0) {
-      next(null, file);
+      next(null, file)
       return;
     }
 
     file._reflinks = arr;
 
     reflinks(arr, options, function(err, links) {
-      if (err) return next(err);
+      if (err) {
+        next(err);
+        return;
+      }
 
       links = links.filter(function(link) {
-        return str.indexOf(link) === -1;
+        return str && str.indexOf(link) === -1;
       });
 
       if (links.length === 0) {
@@ -68,4 +71,3 @@ module.exports = function(options) {
     });
   });
 };
-

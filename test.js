@@ -75,6 +75,19 @@ describe('gulp-reflinks', function() {
       });
   });
 
+  it('should ignore reflinks with invalid characters', function(cb) {
+    var files = [];
+    vfs.src('fixtures/non-reflinks.md')
+      .pipe(reflinks())
+      .on('data', function(file) {
+        files.push(file);
+      })
+      .on('end', function() {
+        assert(!/https/.test(files[0].contents.toString()));
+        cb();
+      });
+  });
+
   it('should set reflinks on `file._reflinks`', function(cb) {
     var files = [];
     vfs.src('fixtures/missing-compact.md')
