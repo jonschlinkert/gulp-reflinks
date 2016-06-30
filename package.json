@@ -1,7 +1,7 @@
 {
   "name": "gulp-reflinks",
   "description": "Gulp plugin for `reflinks`. Lints a markdown string to find missing reflinks for npm package names, resolves the homepage or repository url from npm, and appends a valid reflink to the document.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/jonschlinkert/gulp-reflinks",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/gulp-reflinks",
@@ -50,8 +50,9 @@
       ]
     },
     "reflinks": [
+      "gulp",
       "verb",
-      "gulp"
+      "verb-readme-generator"
     ],
     "lint": {
       "reflinks": true
