@@ -12,7 +12,7 @@ var through = require('through2');
 module.exports = function(options) {
   options = options || [];
 
-  var regex = /((?!`)\[[^\W\]]+\]\[\](?!`)|(?!`)\[[^\W\]]+\](?= |$))/g;
+  var regex = /((?!`)\[[^\W][^\]]+\]\[\](?!`)|(?!`)\[[^\W][^\]]+\](?= |$))/g;
   var count = 0;
   var arr = [];
 
