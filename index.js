@@ -34,6 +34,7 @@ module.exports = function(options) {
       matches.forEach(function(match) {
         var idx = match.indexOf(']');
         var name = match.slice(1, idx).trim().toLowerCase();
+        if (!/^[-\w.]+$/.test(name)) return;
         if (name && arr.indexOf(name) === -1) {
           arr.push(name);
           count++;
@@ -41,13 +42,12 @@ module.exports = function(options) {
       });
     }
 
-    debug('found %s missing reflink(s): %j', arr.length, arr);
-
     if (count === 0) {
-      next(null, file)
+      next(null, file);
       return;
     }
 
+    debug('found %s missing reflink(s): %j', arr.length, arr);
     file._reflinks = arr;
 
     reflinks(arr, options, function(err, links) {
