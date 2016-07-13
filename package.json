@@ -22,9 +22,8 @@
     "test": "mocha"
   },
   "dependencies": {
-    "debug": "^2.2.0",
-    "reflinks": "^0.2.6",
-    "through2": "^2.0.1"
+    "through2": "^2.0.1",
+    "verb-reflinks": "^0.1.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
