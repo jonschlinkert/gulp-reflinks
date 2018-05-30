@@ -10,29 +10,23 @@
   },
   "license": "MIT",
   "files": [
-    "index.js",
-    "LICENSE",
-    "README.md"
+    "index.js"
   ],
   "main": "index.js",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=8"
   },
   "scripts": {
     "test": "mocha"
   },
   "dependencies": {
-    "through2": "^2.0.1",
-    "verb-reflinks": "^0.1.0"
+    "through2": "^2.0.3",
+    "verb-reflinks": "^1.0.0"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^2.0.0",
-    "gulp-format-md": "^0.1.9",
-    "gulp-istanbul": "^0.10.4",
-    "gulp-mocha": "^2.2.0",
-    "mocha": "^2.4.5",
-    "vinyl-fs": "^2.4.3"
+    "gulp-format-md": "^1.0.0",
+    "mocha": "^5.2.0",
+    "vinyl-fs": "^3.0.3"
   },
   "keywords": [
     "gulp",
@@ -55,11 +49,6 @@
         "reflinks"
       ]
     },
-    "reflinks": [
-      "gulp",
-      "verb",
-      "verb-readme-generator"
-    ],
     "lint": {
       "reflinks": true
     }
