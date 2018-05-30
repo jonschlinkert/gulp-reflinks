@@ -1,10 +1,15 @@
 'use strict';
 
-var reflinks = require('verb-reflinks');
-var through = require('through2');
+const reflinks = require('verb-reflinks');
+const through = require('through2');
 
-module.exports = function(options) {
-  return through.obj(function(file, enc, next) {
-    reflinks(options)(file, next);
+module.exports = options => {
+  const fn = reflinks(options);
+  return through.obj((file, enc, next) => {
+    if (file.isNull()) {
+      next(null, file);
+      return;
+    }
+    fn(file, next);
   });
 };

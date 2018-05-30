@@ -1,9 +1,9 @@
 'use strict';
 
 require('mocha');
-var assert = require('assert');
-var reflinks = require('./');
-var vfs = require('vinyl-fs');
+const assert = require('assert');
+const vfs = require('vinyl-fs');
+const reflinks = require('./');
 
 describe('gulp-reflinks', function() {
   it('should export a function', function() {
